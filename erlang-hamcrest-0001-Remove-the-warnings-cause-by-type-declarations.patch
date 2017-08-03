@@ -1,0 +1,25 @@
+From: Farruco Sanjurjo <madtrick@gmail.com>
+Date: Mon, 2 Feb 2015 20:26:19 +0100
+Subject: [PATCH] Remove the warnings cause by type declarations
+
+Modify type declarations that raised deprecation warnings. These
+were the warnings:
+
+deps/hamcrest/include/hamcrest_internal.hrl:33: type set/0 is deprecated and will be removed in OTP 18.0; use use sets:set/0 or preferably sets:set/1
+deps/hamcrest/include/hamcrest_internal.hrl:34: type gb_set/0 is deprecated and will be removed in OTP 18.0; use use gb_sets:set/0 or preferably gb_sets:set/1
+
+diff --git a/include/hamcrest_internal.hrl b/include/hamcrest_internal.hrl
+index 46df5bc..039686d 100644
+--- a/include/hamcrest_internal.hrl
++++ b/include/hamcrest_internal.hrl
+@@ -30,8 +30,8 @@
+     -type hc_set()    :: sets:set().
+     -type hc_gb_set() :: gb_sets:set().
+ -else.
+-    -type hc_set()    :: set().
+-    -type hc_gb_set() :: gb_set().
++    -type hc_set()    :: sets:set().
++    -type hc_gb_set() :: gb_sets:set().
+ -endif.
+ 
+ -record('hamcrest.matchspec', {
